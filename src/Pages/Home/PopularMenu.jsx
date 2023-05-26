@@ -6,27 +6,24 @@ import MenuItems from "../../Shared-Pages/MenuItems/MenuItems";
 const PopularMenu = () => {
 
     const [menu , setMenu] = useState([]);
-    useEffect(() =>
+    useEffect(() =>{
     fetch('Menu.json')
     
     .then (res => res.json())
-    .then (data => {
+    .then (data =>{const popularItems = data.filter (item => item.category === 'popular' )
 
-        const popularItems = data.filter(item => item.category === 'popular')
+setMenu(popularItems)
 
-        setMenu(popularItems)
-    })
+} )
+
+      
     
-    , [])
-
-
-
-
+}, [])
 
 
     return (
        
-        <div>
+        <div className="grid md:grid-cols-2 gap-8 mt-8 mb-16">
 
       
 
@@ -34,7 +31,7 @@ const PopularMenu = () => {
             
             menu.map(item => <MenuItems
                 key ={item._id}
-                items={item}
+                item={item}
             >
             
             
