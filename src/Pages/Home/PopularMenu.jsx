@@ -1,24 +1,28 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import MenuItems from "../../Shared-Pages/MenuItems/MenuItems";
+import useMenu from "../../Hooks/useMenu";
 
 
 const PopularMenu = () => {
 
-    const [menu , setMenu] = useState([]);
-    useEffect(() =>{
-    fetch('Menu.json')
+//     const [menu , setMenu] = useState([]);
+//     useEffect(() =>{
+//     fetch('Menu.json')
     
-    .then (res => res.json())
-    .then (data =>{const popularItems = data.filter (item => item.category === 'popular' )
+//     .then (res => res.json())
+//     .then (data =>{const popularItems = data.filter (item => item.category === 'popular' )
 
-setMenu(popularItems)
+// setMenu(popularItems)
 
-} )
+// } )
 
       
     
-}, [])
+// }, [])
+
+const [menu] = useMenu();
+const popular = menu.filter(item => item.category === 'popular')
 
 
     return (
@@ -29,7 +33,7 @@ setMenu(popularItems)
 
         {
             
-            menu.map(item => <MenuItems
+            popular.map(item => <MenuItems
                 key ={item._id}
                 item={item}
             >
