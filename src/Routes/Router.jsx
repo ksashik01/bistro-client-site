@@ -6,6 +6,8 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu/Menu";
 import OurOrder from "../Pages/Our-Order/OurOrder";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 
  export  const router = createBrowserRouter([
@@ -28,6 +30,16 @@ import OurOrder from "../Pages/Our-Order/OurOrder";
             path:'order/:category',
             element:<OurOrder></OurOrder>
         },
+
+        {
+          path:'/login',
+          element:<Login></Login>
+      },
+
+      {
+        path:'/signup',
+        element:<SignUp></SignUp>
+    },
 
       ]
     },
