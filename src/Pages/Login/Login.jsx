@@ -1,20 +1,27 @@
-// import { useRef, useState } from 'react';
+import { useState } from 'react';
+import Swal from 'sweetalert2'
+
 import { useContext } from 'react';
-// import { useEffect } from 'react';
-// import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useEffect } from 'react';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-    // const captchRef = useRef(null);
-    // const [disabled, setDisable] = useState(true);
-    const {signIn} = useContext(AuthContext)
+  
+    const [disabled, setDisable] = useState(true);
+    const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // useEffect(() =>{
-    //    loadCaptchaEnginge(6); 
 
-    // })
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() =>{
+       loadCaptchaEnginge(6); 
+
+    })
 
 
 
@@ -28,20 +35,37 @@ const handleLogin = event =>{
     signIn(email, password)
     .then (result =>{
       const user = result.user;
-      console.log(user)
+      console.log(user);
+
+     
+Swal.fire({
+  title: 'User Login Succesful',
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  }
+})
+
+navigate(from , {replace:true});
+
+
     })
 }
-// const handleValidatedCaptch = () =>{
-//     const user_captcha_Value = captchRef.current.value;
-//     console.log(user_captcha_Value)
-//     if(validateCaptcha (user_captcha_Value)){
-//             setDisable(false)
-//     }
-//     else{
-//             setDisable(true)
-//     }
 
-// }
+
+const handleValidatedCaptch = (e) =>{
+    const user_captcha_Value = e.target.value;
+    console.log(user_captcha_Value)
+    if(validateCaptcha (user_captcha_Value)){
+            setDisable(false)
+    }
+    else{
+            setDisable(true)
+    }
+
+}
 
 
 
@@ -75,18 +99,18 @@ const handleLogin = event =>{
 
         <div className="form-control">
           <label className="label">
-          {/* <LoadCanvasTemplate /> */}
+          <LoadCanvasTemplate />
 
           </label>
-          {/* ref={captchRef} */}
-          <input  type="text" name="captcha" placeholder="Type Captch" className="input input-bordered" />
-          {/* onClick={handleValidatedCaptch} */}
-          <button  className='btn btn-outline btn-xs'>Validated</button>
+         
+          <input  onBlur={handleValidatedCaptch}  type="text" name="captcha" placeholder="Type Captch" className="input input-bordered" />
+         
+          {/* <button  className='btn btn-outline btn-xs'>Validated</button> */}
          
         </div>
-        {/* disabled={disabled} */}
-        <div className="form-control mt-6">
-            <input  className="btn btn-danger" type="submit" value="Login" />
+        
+        <div  className="form-control mt-6">
+            <input disabled={false}   className="btn btn-danger" type="submit" value="Login" />
         </div>
       </form>
      <p>New Here?  <Link to="/signup">
