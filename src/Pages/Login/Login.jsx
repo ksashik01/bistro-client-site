@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../Shared-Pages/SocialLoginPages/SocialLogin';
 
 
 const Login = () => {
@@ -14,6 +15,8 @@ const Login = () => {
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+
+    
 
 
     const from = location.state?.from?.pathname || "/";
@@ -116,7 +119,9 @@ const handleValidatedCaptch = (e) =>{
      <p>New Here?  <Link to="/signup">
      <button className='btn btn-link'>Create a New Account</button>
       </Link></p>
+      <SocialLogin></SocialLogin>
     </div>
+ 
   </div>
 </div>
     );

@@ -1,12 +1,57 @@
 import { Helmet } from "react-helmet-async";
 import useCart from "../../../Hooks/UseCart";
 import { HiTrash } from "react-icons/hi2";
+import Swal from "sweetalert2";
+
+
+
 
 
 
 const MyCart = () => {
-    const [cart] = useCart();
-    const total = cart.reduce ((sum , item) => item.price + sum, 0)
+    const [cart, refetch] = useCart();
+    const total = cart.reduce((sum , item) => item.price + sum, 0)
+
+
+
+
+const handleDeleted = item =>{
+ 
+
+
+
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:5000/carts/${item._id}`,{
+        method:'DELETE'
+      })
+
+
+      .then (res => res.json())
+      .then (data =>{
+        if (data.deletedCount >0){
+          refetch()
+          Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+        }
+    })
+    }
+  })
+}
+
+
     return (
         <div className="mt-40">
             <Helmet>My Cart</Helmet>
@@ -15,9 +60,6 @@ const MyCart = () => {
                 <h3>Total price: ${total}</h3>
                 <button className="btn btn-warning btn-sm">Pay</button>
             </div>
-
-
-
 
 
 
@@ -44,10 +86,10 @@ const MyCart = () => {
         key={item._id}
         >
             <td>
-             {index + 1}
+             {index+1 }
             </td>
             <td>
-              
+             
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
                     <img src={item.image} alt="Avatar Tailwind CSS Component" />
@@ -59,19 +101,16 @@ const MyCart = () => {
                 </div>
              
             </td>
+           
+            <td>{item.name}</td>
+            <td>Price: ${item.price}</td>
             <td>
-              Zemlak, Daniel and Leannon
-              <br/>
-              <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
-            <td>
-              <button className="btn text-danger"><HiTrash></HiTrash></button>
+              <button onClick={() => handleDeleted(item)} className="btn text-danger"><HiTrash></HiTrash></button>
             </td>
           </tr>
        )
      }
-    
+   
     </tbody>
    
   </table>
@@ -80,4 +119,5 @@ const MyCart = () => {
     );
 };
 
-export default MyCart; 
+
+export default MyCart;
