@@ -10,6 +10,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import SecrectPage from "../Shared-Pages/SecrectPages/SecrectPage";
+import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 
 
  export  const router = createBrowserRouter([
@@ -52,4 +54,25 @@ import SecrectPage from "../Shared-Pages/SecrectPages/SecrectPage";
 
       ]
     },
+
+    {
+      path:'dashboard',
+      element:<Dashboard></Dashboard>,
+      children:[
+          {
+              path:'mycart',
+              element:<MyCart></MyCart>
+
+          }
+
+
+
+      ]
+    }
+
+
+
+
+
+
   ]);

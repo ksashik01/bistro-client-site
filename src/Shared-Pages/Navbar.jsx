@@ -24,7 +24,7 @@ const [cart] = useCart();
   
   <li>
 
-<Link to="/">
+<Link to="/dashboard/mycart">
 <button className="btn gap-2">
  <FaShoppingCart></FaShoppingCart>
   <div className="badge badge-secondary">+{cart?.length || 0}</div>
