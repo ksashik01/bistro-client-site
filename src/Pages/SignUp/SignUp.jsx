@@ -47,7 +47,7 @@ const onSubmit = data =>{
               });
             }
 
-          })
+        })
 
           console.log('User Profile info Updated')
       
