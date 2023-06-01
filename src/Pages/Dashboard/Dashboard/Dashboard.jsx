@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaShoppingCart, FaWallet, FaCalendarAlt,FaHome } from 'react-icons/fa';
+import { FaShoppingCart, FaWallet, FaCalendarAlt,FaHome, FaUtensils,FaBook } from 'react-icons/fa';
 import { BsMenuDown } from "react-icons/bs";
 import useCart from "../../../Hooks/UseCart";
 
@@ -24,6 +24,12 @@ const Dashboard = () => {
           {
             isAdmin?
             <>
+            <li><NavLink to="home"><FaHome></FaHome>Admin</NavLink></li>
+              
+                <li><NavLink to="dashboard/reservation"><FaUtensils></FaUtensils>Add Items</NavLink></li>
+                <li><NavLink to="/dashboard/reservation"><FaUtensils></FaUtensils>Manage Items</NavLink></li>
+                <li><NavLink to="/dashboard/history"><FaBook></FaBook>Manage Bookins</NavLink></li>
+                <li><NavLink to="/dashboard/allusers"><FaBook></FaBook>All Users</NavLink></li>
             
             </>
             :
@@ -38,14 +44,16 @@ const Dashboard = () => {
                 <li><NavLink to="dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink></li>
                 <div className="divider"></div>
                 <li><NavLink><FaHome></FaHome>Home</NavLink></li>
+                <li><NavLink to="/menu"> <FaWallet></FaWallet> Our Menu</NavLink></li>
+        <li><NavLink to="/order/salad"><BsMenuDown></BsMenuDown>Our Order</NavLink></li>
+
             </>
           }
 
 
 
                 
-                <li><NavLink to="/menu"> <FaWallet></FaWallet> Our Menu</NavLink></li>
-        <li><NavLink to="/order/salad"><BsMenuDown></BsMenuDown>Our Order</NavLink></li>
+          
           </ul>
        
         </div>
