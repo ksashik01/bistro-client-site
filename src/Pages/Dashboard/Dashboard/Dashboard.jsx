@@ -30,6 +30,7 @@ const Dashboard = () => {
                 <li><NavLink to="/dashboard/reservation"><FaUtensils></FaUtensils>Manage Items</NavLink></li>
                 <li><NavLink to="/dashboard/history"><FaBook></FaBook>Manage Bookins</NavLink></li>
                 <li><NavLink to="/dashboard/allusers"><FaBook></FaBook>All Users</NavLink></li>
+                <p>Hello</p>
             
             </>
             :
